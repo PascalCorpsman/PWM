@@ -1,0 +1,152 @@
+object Form5: TForm5
+  Left = 329
+  Height = 588
+  Top = 117
+  Width = 536
+  Caption = 'Form5'
+  ClientHeight = 588
+  ClientWidth = 536
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 40
+    Width = 89
+    Caption = 'Registered Users:'
+    ParentColor = False
+  end
+  object ListBox1: TListBox
+    Left = 120
+    Height = 144
+    Top = 40
+    Width = 406
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    ScrollWidth = 404
+    TabOrder = 0
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 70
+    Caption = 'Logged in as:'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 120
+    Height = 15
+    Top = 8
+    Width = 34
+    Caption = 'Label3'
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 432
+    Height = 25
+    Top = 192
+    Width = 95
+    Anchors = [akTop, akRight]
+    Caption = 'Add user'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 8
+    Height = 25
+    Top = 554
+    Width = 519
+    Anchors = [akLeft, akRight, akBottom]
+    Caption = 'OK'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+  object Button3: TButton
+    Left = 120
+    Height = 25
+    Top = 189
+    Width = 94
+    Caption = 'Del user'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object CheckListBox1: TCheckListBox
+    Left = 8
+    Height = 272
+    Top = 232
+    Width = 519
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ItemHeight = 0
+    TabOrder = 4
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 15
+    Top = 208
+    Width = 89
+    Caption = 'Datasets editable'
+    ParentColor = False
+  end
+  object Button4: TButton
+    Left = 8
+    Height = 25
+    Top = 512
+    Width = 48
+    Anchors = [akLeft, akBottom]
+    Caption = 'all'
+    OnClick = Button4Click
+    TabOrder = 5
+  end
+  object Button5: TButton
+    Left = 63
+    Height = 25
+    Top = 512
+    Width = 48
+    Anchors = [akLeft, akBottom]
+    Caption = 'None'
+    OnClick = Button5Click
+    TabOrder = 6
+  end
+  object Button6: TButton
+    Left = 152
+    Height = 25
+    Top = 512
+    Width = 182
+    Anchors = [akRight, akBottom]
+    Caption = 'Remove rights for selected'
+    OnClick = Button6Click
+    TabOrder = 7
+  end
+  object Button7: TButton
+    Left = 344
+    Height = 25
+    Top = 512
+    Width = 182
+    Anchors = [akRight, akBottom]
+    Caption = 'Add rights for selected'
+    OnClick = Button7Click
+    TabOrder = 8
+  end
+  object CheckBox1: TCheckBox
+    Left = 216
+    Height = 19
+    Hint = 'Set this if you want to delete a user and this lead to datasets that are not accessable anymore.'
+    Top = 192
+    Width = 109
+    Caption = 'Delete users data'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 9
+  end
+  object Button8: TButton
+    Left = 408
+    Height = 25
+    Top = 8
+    Width = 119
+    Caption = 'Change password'
+    OnClick = Button8Click
+    TabOrder = 10
+  end
+end
