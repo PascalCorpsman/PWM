@@ -1,3 +1,59 @@
+(******************************************************************************)
+(* PWM                                                             ??.??.???? *)
+(*                                                                            *)
+(* Version     : 0.16                                                         *)
+(*                                                                            *)
+(* Author      : Uwe Schächterle (Corpsman)                                   *)
+(*                                                                            *)
+(* Support     : www.Corpsman.de                                              *)
+(*                                                                            *)
+(* Description : <Module_description>                                         *)
+(*                                                                            *)
+(* License     : See the file license.md, located under:                      *)
+(*  https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md  *)
+(*  for details about the license.                                            *)
+(*                                                                            *)
+(*               It is not allowed to change or remove this text from any     *)
+(*               source file of the project.                                  *)
+(*                                                                            *)
+(* Warranty    : There is no warranty, neither in correctness of the          *)
+(*               implementation, nor anything other that could happen         *)
+(*               or go wrong, use at your own risk.                           *)
+(*                                                                            *)
+(* Known Issues: none                                                         *)
+(*                                                                            *)
+(* History     : 0.01 - Initial version                                       *)
+(*               0.02 = Merge Databases                                       *)
+(*               0.03 = Bessere Fehlermeldungen                               *)
+(*                      Erkennen, wenn Dateiversion zu neu                    *)
+(*                      Gui-Gimicks eingebaut                                 *)
+(*               0.04 = Besserer Vergleich beim Merge                         *)
+(*               0.05 = Speicher an dem Passwörter Abliegen, vor dem Freigeben*)
+(*                      mit * überschreiben                                   *)
+(*               0.06 = Copy Username spinnt manchmal                         *)
+(*               0.07 = im Mergedialog haben diverse Visualisierungen nicht   *)
+(*                      gestimmt                                              *)
+(*                      Username und Description für "Überschreiben" Heuristik*)
+(*               0.08 = Anzeigen PWM + Datenbankname in Application.Title     *)
+(*               0.09 = 2. Abfrage beim Beenden ohne Speichern                *)
+(*                      Fix Anchoring im Add Dialog                           *)
+(*               0.10 = Automatisches anwählen eines Datensatzes nach dem     *)
+(*                      Erstellen / Merge                                     *)
+(*                      einführen MultiUser System                            *)
+(*               0.11 = User können nun ihre eigenen Passwörter ändern        *)
+(*                      Eine Fehlerhaft geöffnete Datenbank kann nicht mehr   *)
+(*                      Editiert werden.                                      *)
+(*               0.12 = Sonderzeichen Editierbar gemacht                      *)
+(*                      Option "nur uppercase" für Passwort generator         *)
+(*               0.13 = Add Option "Copy URL"                                 *)
+(*               0.14 = Password Verification when adding new users           *)
+(*               0.15 = Fix, non Admin user was not able to edit his own      *)
+(*                      dataset when editing right after creation             *)
+(*                      Fix, Beim Editieren eines Datensatzes wurden die Daten*)
+(*                      in der Liste im Hauptformular nicht Aktualisiert      *)
+(*               0.16 = Retry password entry when PW is invalid.              *)
+(*                                                                            *)
+(******************************************************************************)
 Unit Unit1;
 
 {$MODE objfpc}{$H+}
@@ -70,8 +126,8 @@ Type
     Procedure StringGrid1DblClick(Sender: TObject);
     Procedure StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
       Var CanSelect: Boolean);
-    procedure UniqueInstance1OtherInstance(Sender: TObject;
-      ParamCount: Integer; const Parameters: array of String);
+    Procedure UniqueInstance1OtherInstance(Sender: TObject;
+      ParamCount: Integer; Const Parameters: Array Of String);
   private
     fUser: String;
     fDataBase: TPWM;
@@ -118,32 +174,6 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
 
 Procedure TForm1.MenuItem10Click(Sender: TObject);
 Begin
-  (*
-   * History: 0.01 = Initialversion
-   *          0.02 = Merge Databases
-   *          0.03 = Bessere Fehlermeldungen
-   *                 Erkennen, wenn Dateiversion zu neu
-   *                 Gui-Gimicks eingebaut
-   *          0.04 = Besserer Vergleich beim Merge
-   *          0.05 = Speicher an dem Passwörter Abliegen, vor dem Freigeben mit * überschreiben
-   *          0.06 = Copy Username spinnt manchmal
-   *          0.07 = im Mergedialog haben diverse Visualisierungen nicht gestimmt
-   *                 Username und Description für "Überschreiben" Heuristik
-   *          0.08 = Anzeigen PWM + Datenbankname in Application.Title
-   *          0.09 = 2. Abfrage beim Beenden ohne Speichern
-   *                 Fix Anchoring im Add Dialog
-   *          0.10 = Automatisches anwählen eines Datensatzes nach dem Erstellen / Merge
-   *                 einführen MultiUser System
-   *          0.11 = User können nun ihre eigenen Passwörter ändern
-   *                 Eine Fehlerhaft geöffnete Datenbank kann nicht mehr Editiert werden.
-   *          0.12 = Sonderzeichen Editierbar gemacht
-   *                 Option "nur uppercase" für Passwort generator
-   *          0.13 = Add Option "Copy URL"
-   *          0.14 = Password Verification when adding new users
-   *          0.15 = Fix, non Admin user was not able to edit his own dataset when editing right after creation
-   *                 Fix, Beim Editieren eines Datensatzes wurden die Daten in der Liste im Hauptformular nicht Aktualisiert
-   *          0.16 = Retry password entry when PW is invalid.
-   *)
   showmessage(
     'PWM - Password Manager ver. 0.16' + LineEnding + LineEnding +
     'Author: Corpsman' + LineEnding +
@@ -488,12 +518,12 @@ Begin
   SelectedRow := aRow;
 End;
 
-procedure TForm1.UniqueInstance1OtherInstance(Sender: TObject;
-  ParamCount: Integer; const Parameters: array of String);
-begin
+Procedure TForm1.UniqueInstance1OtherInstance(Sender: TObject;
+  ParamCount: Integer; Const Parameters: Array Of String);
+Begin
   // Die Andere instanz stirbt, wir bringen uns nach Vorne, dass der User das auch mitkriegt ;)
   Application.BringToFront;
-end;
+End;
 
 Function TForm1.SecureDBIsSaved(Msg: String): TResult;
 Begin

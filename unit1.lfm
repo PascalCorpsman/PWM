@@ -32,7 +32,7 @@ object Form1: TForm1
     end
     object Edit1: TEdit
       Left = 96
-      Height = 25
+      Height = 26
       Top = 0
       Width = 438
       Anchors = [akTop, akLeft, akRight]
@@ -53,7 +53,7 @@ object Form1: TForm1
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 321
+    Height = 320
     Top = 56
     Width = 621
     Align = alClient
@@ -84,8 +84,8 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 23
-    Top = 377
+    Height = 24
+    Top = 376
     Width = 621
     Panels = <    
       item
