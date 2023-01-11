@@ -6,14 +6,15 @@ Author: Corpsman
 Homepage: http://www.Corpsman.de
 
 License:
-   This program is postcardware, see Homepage
-   for further details.
+  See the file license.md, located under:
+  https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md
+  for details about the license.
 
 Warranty: There is no warranty use on your own risk!
 
 Encryption algorithm: Rijndael (4096-Bit Key)
 
-Descrption:
+Description:
    This is a simple password manager
    do not leave the programm open for long times
    its security is only existing when closed.
