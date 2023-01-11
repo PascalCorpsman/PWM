@@ -5,9 +5,9 @@ PWM - Password Manager
 Author: Corpsman
 Homepage: http://www.Corpsman.de
 
-License:
-  See the file license.md, located under:
-  https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md
+License:<br>
+  See the file license.md, located under:<br>
+  https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md<br>
   for details about the license.
 
 Warranty: There is no warranty use on your own risk!
