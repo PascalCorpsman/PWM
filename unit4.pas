@@ -28,10 +28,15 @@ Type
   TForm4 = Class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     Label1: TLabel;
     Label2: TLabel;
+    Procedure Button3MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button3MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     Procedure Edit1KeyPress(Sender: TObject; Var Key: char);
     Procedure FormCreate(Sender: TObject);
   private
@@ -60,6 +65,18 @@ End;
 Procedure TForm4.Edit1KeyPress(Sender: TObject; Var Key: char);
 Begin
   If key = #13 Then Button1.Click;
+End;
+
+Procedure TForm4.Button3MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit1.PasswordChar := #0;
+End;
+
+Procedure TForm4.Button3MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit1.PasswordChar := '*';
 End;
 
 End.

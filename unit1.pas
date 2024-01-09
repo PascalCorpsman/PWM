@@ -1,13 +1,13 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.16                                                         *)
+(* Version     : 0.17                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
 (* Support     : www.Corpsman.de                                              *)
 (*                                                                            *)
-(* Description : <Module_description>                                         *)
+(* Description : a simple multiuser Password manager                          *)
 (*                                                                            *)
 (* License     : See the file license.md, located under:                      *)
 (*  https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md  *)
@@ -52,6 +52,7 @@
 (*                      Fix, Beim Editieren eines Datensatzes wurden die Daten*)
 (*                      in der Liste im Hauptformular nicht Aktualisiert      *)
 (*               0.16 = Retry password entry when PW is invalid.              *)
+(*               0.17 = Add "unhide" Password Button on startup dialog        *)
 (*                                                                            *)
 (******************************************************************************)
 Unit Unit1;
@@ -175,7 +176,7 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
 Procedure TForm1.MenuItem10Click(Sender: TObject);
 Begin
   showmessage(
-    'PWM - Password Manager ver. 0.16' + LineEnding + LineEnding +
+    'PWM - Password Manager ver. 0.17' + LineEnding + LineEnding +
     'Author: Corpsman' + LineEnding +
     'Homepage: http://www.Corpsman.de' + LineEnding + LineEnding +
     'License:' + LineEnding +

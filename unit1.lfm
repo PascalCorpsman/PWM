@@ -4,15 +4,15 @@ object Form1: TForm1
   Top = 124
   Width = 621
   Caption = 'Form1'
-  ClientHeight = 400
+  ClientHeight = 422
   ClientWidth = 621
   Menu = MainMenu1
+  Position = poScreenCenter
+  LCLVersion = '3.99.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poScreenCenter
-  LCLVersion = '2.3.0.0'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 56
@@ -36,9 +36,9 @@ object Form1: TForm1
       Top = 0
       Width = 438
       Anchors = [akTop, akLeft, akRight]
-      OnKeyPress = Edit1KeyPress
       TabOrder = 0
       Text = 'Edit1'
+      OnKeyPress = Edit1KeyPress
     end
     object Button1: TButton
       Left = 542
@@ -47,13 +47,13 @@ object Form1: TForm1
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Search'
-      OnClick = Button1Click
       TabOrder = 1
+      OnClick = Button1Click
     end
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 320
+    Height = 342
     Top = 56
     Width = 621
     Align = alClient
@@ -85,7 +85,7 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Height = 24
-    Top = 376
+    Top = 398
     Width = 621
     Panels = <    
       item
