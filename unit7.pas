@@ -28,6 +28,9 @@ Type
   TForm7 = Class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
@@ -35,7 +38,19 @@ Type
     Label2: TLabel;
     Label3: TLabel;
     Procedure Button1Click(Sender: TObject);
-    procedure Edit3KeyPress(Sender: TObject; var Key: char);
+    Procedure Button3MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button3MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button4MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button4MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button5MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Button5MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    Procedure Edit3KeyPress(Sender: TObject; Var Key: char);
     Procedure FormCreate(Sender: TObject);
   private
 
@@ -78,10 +93,46 @@ Begin
   ModalResult := mrOK;
 End;
 
-procedure TForm7.Edit3KeyPress(Sender: TObject; var Key: char);
-begin
-  if key = #13 then Button1.Click;
-end;
+Procedure TForm7.Button3MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit3.PasswordChar := #0;
+End;
+
+Procedure TForm7.Button3MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit3.PasswordChar := '*';
+End;
+
+Procedure TForm7.Button4MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit2.PasswordChar := #0;
+End;
+
+Procedure TForm7.Button4MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit2.PasswordChar := '*';
+End;
+
+Procedure TForm7.Button5MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit1.PasswordChar := #0;
+End;
+
+Procedure TForm7.Button5MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+Begin
+  edit1.PasswordChar := '*';
+End;
+
+Procedure TForm7.Edit3KeyPress(Sender: TObject; Var Key: char);
+Begin
+  If key = #13 Then Button1.Click;
+End;
 
 End.
 
