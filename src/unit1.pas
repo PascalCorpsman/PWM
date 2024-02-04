@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.17                                                         *)
+(* Version     : 0.18                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -53,6 +53,7 @@
 (*                      in der Liste im Hauptformular nicht Aktualisiert      *)
 (*               0.16 = Retry password entry when PW is invalid.              *)
 (*               0.17 = Add "unhide" Password Button on startup dialog        *)
+(*               0.18 = Add "unhide" Passwort to single user DB prompt        *)
 (*                                                                            *)
 (******************************************************************************)
 Unit Unit1;
@@ -176,7 +177,7 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
 Procedure TForm1.MenuItem10Click(Sender: TObject);
 Begin
   showmessage(
-    'PWM - Password Manager ver. 0.17' + LineEnding + LineEnding +
+    'PWM - Password Manager ver. 0.18' + LineEnding + LineEnding +
     'Author: Corpsman' + LineEnding +
     'Homepage: http://www.Corpsman.de' + LineEnding + LineEnding +
     'License:' + LineEnding +
@@ -551,7 +552,6 @@ End;
 Function TForm1.PromptPassword(Const Database: String; UserToPreselect: String;
   EnableUserSelection: Boolean): TUser;
 Var
-  pw: String;
   users: TStringList;
   i: Integer;
   Retry: Boolean;
@@ -559,23 +559,16 @@ Begin
   result.Password := '';
   result.UserName := '';
   Retry := true;
+  users := TPWM.GetUsersFromDatabase(Database);
   Repeat
-    pw := '';
-    users := TPWM.GetUsersFromDatabase(Database);
     If users.Count = 1 Then Begin
-      If InputQuery('Please enter password for: ' + ExtractFileNameOnly(Database), '', true, pw) Then Begin
-        If trim(pw) <> '' Then retry := false;
-        result.Password := pw;
-        result.UserName := users[0];
-      End
-      Else Begin
-        retry := false;
-        result.Password := '';
-        result.UserName := users[0];
-      End;
+      form4.ComboBox1.Text := users[0];
+      form4.ComboBox1.Visible := false;
+      form4.label1.Visible := false;
     End
     Else Begin
-      form4.caption := 'Please enter password for:' + ExtractFileNameOnly(Database);
+      form4.ComboBox1.Visible := true;
+      form4.label1.Visible := true;
       form4.ComboBox1.Clear;
       form4.ComboBox1.Items.CommaText := users.CommaText;
       form4.ComboBox1.ItemIndex := 0;
@@ -590,19 +583,20 @@ Begin
       End;
       form4.Edit1.Text := '';
       form4.ComboBox1.Enabled := EnableUserSelection;
-      If Form4.ShowModal = mrOK Then Begin
-        If trim(form4.Edit1.Text) <> '' Then retry := false;
-        result.UserName := form4.ComboBox1.Text;
-        result.Password := form4.Edit1.Text;
-        form4.Edit1.Text := ''; // reicht das schon ?
-        IniPropStorage1.WriteString('LastUser', form4.ComboBox1.Text);
-      End
-      Else Begin
-        retry := false;
-      End;
     End;
-    users.free;
+    form4.caption := 'Please enter password for:' + ExtractFileNameOnly(Database);
+    If Form4.ShowModal = mrOK Then Begin
+      If trim(form4.Edit1.Text) <> '' Then retry := false;
+      result.UserName := form4.ComboBox1.Text;
+      result.Password := form4.Edit1.Text;
+      form4.Edit1.Text := ''; // reicht das schon ?
+      IniPropStorage1.WriteString('LastUser', form4.ComboBox1.Text);
+    End
+    Else Begin
+      retry := false;
+    End;
   Until Not Retry;
+  users.free;
 End;
 
 Procedure TForm1.ClearLCL();

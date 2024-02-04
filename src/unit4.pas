@@ -65,6 +65,7 @@ End;
 Procedure TForm4.Edit1KeyPress(Sender: TObject; Var Key: char);
 Begin
   If key = #13 Then Button1.Click;
+  If key = #27 Then Button2.Click;
 End;
 
 Procedure TForm4.Button3MouseDown(Sender: TObject; Button: TMouseButton;
