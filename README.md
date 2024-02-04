@@ -1,24 +1,36 @@
 # PWM
 
-PWM - Password Manager
+This is PassWord Manager (PWM) written in Free Pascal. It uses a Rijndael (4096-Bit Key) to store its data in its database. Do not leave the programm open for long times its security is only existing when closed.
 
-Author: Corpsman
-Homepage: http://www.Corpsman.de
+![](images/preview_main.png)
 
-License:<br>
+Features:
+- multi user
+- easy to use
+- password generation
+- link storage
+- Windows / Linux supported
+
+#### Login screen
+![](images/preview_password.png)
+
+#### Add new password
+![](images/preview_add.png)
+
+#### User managament
+![](images/preview_usermanagement.png)
+
+## License
   See the file license.md, located under:<br>
   https://github.com/PascalCorpsman/Software_Licenses/blob/main/license.md<br>
   for details about the license.
 
 Warranty: There is no warranty use on your own risk!
 
-Encryption algorithm: Rijndael (4096-Bit Key)
+## What needs to be done to compile the code ?
 
-Description:
-   This is a simple password manager
-   do not leave the programm open for long times
-   its security is only existing when closed.
-
-This is the public source mirror of the PWM Project. PWM stands for PassWordManager and is a multi user password manager written in Lazarus.
-
+1. Install Lazarus IDE from https://www.lazarus-ide.org/
+2. Install the following packages into the Lazarus IDE (from online package manager):   
+    - Unique Instance
+    - dcpcrypt
 
