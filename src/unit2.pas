@@ -46,6 +46,7 @@ Type
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
+    Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
@@ -60,6 +61,7 @@ Type
     Memo1: TMemo;
     Memo2: TMemo;
     Procedure Button1Click(Sender: TObject);
+    Procedure Edit4Change(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
   private
     fStoredData, fStoredData2: TDataSet;
@@ -143,6 +145,12 @@ Begin
     res := uppercase(res);
   End;
   edit4.text := res;
+  Edit4Change(Nil);
+End;
+
+Procedure TForm2.Edit4Change(Sender: TObject);
+Begin
+  label11.caption := format('[%d]', [length(edit4.text)]);
 End;
 
 Procedure TForm2.Init(aCaption: String; Const DataSet: TDataSet; ShowDelete,
@@ -158,6 +166,7 @@ Begin
   edit3.ReadOnly := ReadOnly;
   edit4.Text := fStoredData.Password;
   edit4.ReadOnly := ReadOnly;
+  Edit4Change(Nil);
   edit6.Text := fStoredData.Email;
   edit6.ReadOnly := ReadOnly;
   memo1.Text := fStoredData.Comment;

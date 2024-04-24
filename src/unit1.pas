@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.18                                                         *)
+(* Version     : 0.19                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -54,6 +54,7 @@
 (*               0.16 = Retry password entry when PW is invalid.              *)
 (*               0.17 = Add "unhide" Password Button on startup dialog        *)
 (*               0.18 = Add "unhide" Passwort to single user DB prompt        *)
+(*               0.19 = ADD show password length in "ADD" dialog              *)
 (*                                                                            *)
 (******************************************************************************)
 Unit Unit1;
@@ -67,6 +68,8 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
+  PWM_Version = '0.19';
+
   IndexPassword = 0;
   IndexUrl = 1;
   IndexDescription = 2;
@@ -164,8 +167,8 @@ Implementation
 {$R *.lfm}
 
 Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
-  , unit2
-  , unit3
+  , unit2 // Add / Compare dataset
+  , unit3 // Merge DB Dialog
   , unit4 // MultiUser Password Prompt
   , unit5 // User Management
   // , unit6 Add User Dialog
@@ -177,7 +180,7 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
 Procedure TForm1.MenuItem10Click(Sender: TObject);
 Begin
   showmessage(
-    'PWM - Password Manager ver. 0.18' + LineEnding + LineEnding +
+    'PWM - Password Manager ver. ' + PWM_Version + LineEnding + LineEnding +
     'Author: Corpsman' + LineEnding +
     'Homepage: http://www.Corpsman.de' + LineEnding + LineEnding +
     'License:' + LineEnding +

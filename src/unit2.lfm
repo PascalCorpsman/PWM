@@ -1,35 +1,35 @@
 object Form2: TForm2
-  Left = 288
+  Left = 371
   Height = 597
-  Top = 120
+  Top = 128
   Width = 847
   Caption = 'Form2'
   ClientHeight = 597
   ClientWidth = 847
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object Label1: TLabel
     Left = 8
-    Height = 16
+    Height = 15
     Top = 13
-    Width = 72
+    Width = 63
     Caption = 'Description:'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 8
-    Height = 16
+    Height = 15
     Top = 48
-    Width = 63
+    Width = 56
     Caption = 'Username:'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 8
-    Height = 16
+    Height = 15
     Top = 80
-    Width = 88
+    Width = 77
     Caption = 'Plattform URL:'
     ParentColor = False
   end
@@ -39,20 +39,20 @@ object Form2: TForm2
     Top = 176
     Width = 441
     Caption = ' Generate a password '
-    ClientHeight = 135
-    ClientWidth = 439
+    ClientHeight = 132
+    ClientWidth = 437
     TabOrder = 5
     object Label5: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 9
-      Width = 43
+      Width = 37
       Caption = 'Length'
       ParentColor = False
     end
     object Edit5: TEdit
       Left = 168
-      Height = 25
+      Height = 23
       Top = 0
       Width = 80
       TabOrder = 0
@@ -62,7 +62,7 @@ object Form2: TForm2
       Left = 8
       Height = 64
       Top = 32
-      Width = 425
+      Width = 423
       Anchors = [akTop, akLeft, akRight]
       AutoFill = True
       Caption = ' Charset '
@@ -74,8 +74,8 @@ object Form2: TForm2
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 47
-      ClientWidth = 423
+      ClientHeight = 44
+      ClientWidth = 419
       Columns = 3
       Items.Strings = (
         'Letters'
@@ -88,10 +88,10 @@ object Form2: TForm2
         0400000002020202
       }
       object Edit7: TEdit
-        Left = 152
-        Height = 19
-        Top = 22
-        Width = 156
+        Left = 149
+        Height = 18
+        Top = 20
+        Width = 153
         TabOrder = 4
         Text = 'Edit7'
       end
@@ -100,7 +100,7 @@ object Form2: TForm2
       Left = 160
       Height = 25
       Top = 97
-      Width = 265
+      Width = 263
       Anchors = [akTop, akLeft, akRight]
       Caption = 'Generate'
       OnClick = Button1Click
@@ -109,7 +109,7 @@ object Form2: TForm2
   end
   object Edit1: TEdit
     Left = 176
-    Height = 25
+    Height = 23
     Top = 5
     Width = 273
     TabOrder = 0
@@ -117,7 +117,7 @@ object Form2: TForm2
   end
   object Edit2: TEdit
     Left = 176
-    Height = 25
+    Height = 23
     Top = 40
     Width = 273
     TabOrder = 1
@@ -125,7 +125,7 @@ object Form2: TForm2
   end
   object Edit3: TEdit
     Left = 176
-    Height = 25
+    Height = 23
     Top = 72
     Width = 273
     TabOrder = 2
@@ -133,17 +133,18 @@ object Form2: TForm2
   end
   object Edit4: TEdit
     Left = 176
-    Height = 25
+    Height = 23
     Top = 136
-    Width = 273
+    Width = 240
+    OnChange = Edit4Change
     TabOrder = 4
     Text = 'Edit4'
   end
   object Label4: TLabel
     Left = 10
-    Height = 16
+    Height = 15
     Top = 145
-    Width = 61
+    Width = 53
     Caption = 'Password:'
     ParentColor = False
   end
@@ -167,15 +168,15 @@ object Form2: TForm2
   end
   object Label6: TLabel
     Left = 8
-    Height = 16
+    Height = 15
     Top = 113
-    Width = 154
+    Width = 135
     Caption = 'Registered E-mail address'
     ParentColor = False
   end
   object Edit6: TEdit
     Left = 176
-    Height = 25
+    Height = 23
     Top = 104
     Width = 273
     TabOrder = 3
@@ -192,9 +193,9 @@ object Form2: TForm2
   end
   object Label7: TLabel
     Left = 8
-    Height = 16
+    Height = 15
     Top = 336
-    Width = 58
+    Width = 54
     Caption = 'Comment'
     ParentColor = False
   end
@@ -210,31 +211,31 @@ object Form2: TForm2
   end
   object Label8: TLabel
     Left = 464
-    Height = 16
+    Height = 15
     Top = 13
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
   object Label9: TLabel
     Left = 464
-    Height = 16
+    Height = 15
     Top = 48
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
   object Label10: TLabel
     Left = 464
-    Height = 16
+    Height = 15
     Top = 80
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
   object Edit8: TEdit
     Left = 480
-    Height = 25
+    Height = 23
     Top = 5
     Width = 273
     TabOrder = 10
@@ -242,7 +243,7 @@ object Form2: TForm2
   end
   object Edit9: TEdit
     Left = 480
-    Height = 25
+    Height = 23
     Top = 40
     Width = 273
     TabOrder = 11
@@ -250,7 +251,7 @@ object Form2: TForm2
   end
   object Edit10: TEdit
     Left = 480
-    Height = 25
+    Height = 23
     Top = 72
     Width = 273
     TabOrder = 12
@@ -258,7 +259,7 @@ object Form2: TForm2
   end
   object Edit11: TEdit
     Left = 480
-    Height = 25
+    Height = 23
     Top = 136
     Width = 273
     TabOrder = 13
@@ -266,23 +267,23 @@ object Form2: TForm2
   end
   object Label12: TLabel
     Left = 466
-    Height = 16
+    Height = 15
     Top = 145
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
   object Label13: TLabel
     Left = 464
-    Height = 16
+    Height = 15
     Top = 113
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
   object Edit12: TEdit
     Left = 480
-    Height = 25
+    Height = 23
     Top = 104
     Width = 273
     TabOrder = 14
@@ -290,9 +291,9 @@ object Form2: TForm2
   end
   object Label14: TLabel
     Left = 464
-    Height = 16
+    Height = 15
     Top = 336
-    Width = 4
+    Width = 5
     Caption = '-'
     ParentColor = False
   end
@@ -305,5 +306,15 @@ object Form2: TForm2
       'Memo2'
     )
     TabOrder = 15
+  end
+  object Label11: TLabel
+    Left = 424
+    Height = 23
+    Top = 136
+    Width = 25
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label11'
+    Layout = tlCenter
   end
 end
