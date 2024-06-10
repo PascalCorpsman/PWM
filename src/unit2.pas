@@ -177,6 +177,7 @@ Begin
   Constraints.MinWidth := Memo1.Width + Memo1.Left + 10;
   Constraints.MaxWidth := Memo1.Width + Memo1.Left + 10;
   InitSpecialCharacters();
+  SenderFormWhereMouseIs(self);
 End;
 
 Procedure TForm2.Init_second(Const DataSet: TDataSet; ReadOnly: Boolean);
@@ -196,6 +197,7 @@ Begin
   memo2.ReadOnly := ReadOnly;
   Constraints.MinWidth := Memo2.Width + Memo2.Left + 10;
   Constraints.MaxWidth := Memo2.Width + Memo2.Left + 10;
+  SenderFormWhereMouseIs(self);
 End;
 
 Function TForm2.GetData(): TDataSet;

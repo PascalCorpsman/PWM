@@ -249,6 +249,7 @@ Begin
   button1.Enabled := fDataBase.AktualUserRights = urAdminRights;
   Checkbox1.Enabled := fDataBase.AktualUserRights = urAdminRights;
   button3.Enabled := fDataBase.AktualUserRights = urAdminRights;
+  SenderFormWhereMouseIs(self);
 End;
 
 End.

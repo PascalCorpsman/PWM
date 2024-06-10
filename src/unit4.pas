@@ -39,6 +39,7 @@ Type
       Shift: TShiftState; X, Y: Integer);
     Procedure Edit1KeyPress(Sender: TObject; Var Key: char);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormShow(Sender: TObject);
   private
 
   public
@@ -50,6 +51,8 @@ Var
 
 Implementation
 
+Uses upwm;
+
 {$R *.lfm}
 
 { TForm4 }
@@ -60,6 +63,11 @@ Begin
   Constraints.MaxWidth := Width;
   Constraints.MinHeight := Height;
   Constraints.MaxHeight := Height;
+End;
+
+Procedure TForm4.FormShow(Sender: TObject);
+Begin
+  SenderFormWhereMouseIs(self);
 End;
 
 Procedure TForm4.Edit1KeyPress(Sender: TObject; Var Key: char);

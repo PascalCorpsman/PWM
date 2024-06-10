@@ -19,7 +19,7 @@ Unit upwm;
 Interface
 
 Uses
-  Classes, SysUtils, udatabase, DCPblowfish, DCPrijndael, DCPsha256, DCPcrypt2;
+  Forms, Classes, SysUtils, udatabase, DCPblowfish, DCPrijndael, DCPsha256, DCPcrypt2;
 
 Const
   (*
@@ -163,8 +163,11 @@ Type
 Function GetEmptyDataSet(): TDataSet;
 Procedure ClearAndFree(Var Text: String);
 Function Compare(Const a, b: TDataSet): Integer;
+Procedure SenderFormWhereMouseIs(Const Form: TForm);
 
 Implementation
+
+Uses Controls, math;
 
 Procedure Nop;
 Begin
@@ -188,6 +191,28 @@ Begin
     (trim(a.Email) = trim(b.Email)) And
     (trim(a.Description) = trim(b.Description)) And
     (trim(a.Comment) = trim(b.Comment)) Then result := 2;
+End;
+
+Function PointInRect(p: Tpoint; r: Trect): boolean;
+Begin
+  result :=
+    (p.x >= min(r.Left, r.Right)) And
+    (p.x <= max(r.Left, r.Right)) And
+    (p.y >= min(r.Top, r.Bottom)) And
+    (p.y <= max(r.Top, r.Bottom));
+End;
+
+Procedure SenderFormWhereMouseIs(Const Form: TForm);
+Var
+  i: Integer;
+Begin
+  For i := 0 To screen.MonitorCount - 1 Do Begin
+    If PointInRect(Mouse.CursorPos, Screen.Monitors[i].BoundsRect) Then Begin
+      Form.Left := (Screen.Monitors[i].BoundsRect.Left + Screen.Monitors[i].BoundsRect.Right - form.Width) Div 2;
+      Form.Top := (Screen.Monitors[i].BoundsRect.Top + Screen.Monitors[i].BoundsRect.Bottom - form.Height) Div 2;
+      exit;
+    End;
+  End;
 End;
 
 Function GetEmptyDataSet(): TDataSet;

@@ -39,6 +39,7 @@ Type
     Procedure Button2Click(Sender: TObject);
     Procedure Edit2Change(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormShow(Sender: TObject);
   private
 
   public
@@ -62,6 +63,11 @@ Begin
   Constraints.MaxWidth := Width;
   Constraints.MinHeight := Height;
   Constraints.MaxHeight := Height;
+End;
+
+Procedure TForm6.FormShow(Sender: TObject);
+Begin
+  SenderFormWhereMouseIs(self);
 End;
 
 Procedure TForm6.Edit2Change(Sender: TObject);

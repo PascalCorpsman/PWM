@@ -37,6 +37,7 @@ Type
     PopupMenu1: TPopupMenu;
     StringGrid1: TStringGrid;
     Procedure FormCreate(Sender: TObject);
+    Procedure FormShow(Sender: TObject);
     Procedure MenuItem1Click(Sender: TObject);
     Procedure MenuItem2Click(Sender: TObject);
     Procedure MenuItem3Click(Sender: TObject);
@@ -74,7 +75,7 @@ Const
   Col_Old_index = 5;
   Col_New_index = 6;
 
-{ TForm3 }
+  { TForm3 }
 
 Procedure TForm3.StringGrid1Resize(Sender: TObject);
 Begin
@@ -97,6 +98,11 @@ End;
 Procedure TForm3.FormCreate(Sender: TObject);
 Begin
   caption := 'Merge overview';
+End;
+
+Procedure TForm3.FormShow(Sender: TObject);
+Begin
+  SenderFormWhereMouseIs(self);
 End;
 
 Procedure TForm3.MenuItem1Click(Sender: TObject);
