@@ -9,6 +9,7 @@ object Form7: TForm7
   Position = poScreenCenter
   LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
+  OnShow = FormShow
   object Label1: TLabel
     Left = 8
     Height = 16

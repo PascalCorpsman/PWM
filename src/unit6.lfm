@@ -6,9 +6,10 @@ object Form6: TForm6
   Caption = 'Form6'
   ClientHeight = 269
   ClientWidth = 354
-  OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.3.0.0'
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
+  OnShow = FormShow
   object Label1: TLabel
     Left = 8
     Height = 16
@@ -18,7 +19,7 @@ object Form6: TForm6
   end
   object Edit1: TEdit
     Left = 24
-    Height = 25
+    Height = 26
     Top = 32
     Width = 320
     EchoMode = emPassword
@@ -35,12 +36,12 @@ object Form6: TForm6
   end
   object Edit2: TEdit
     Left = 24
-    Height = 25
+    Height = 26
     Top = 96
     Width = 320
-    OnChange = Edit2Change
     TabOrder = 1
     Text = 'Edit2'
+    OnChange = Edit2Change
   end
   object Label3: TLabel
     Left = 8
@@ -51,7 +52,7 @@ object Form6: TForm6
   end
   object Edit3: TEdit
     Left = 24
-    Height = 25
+    Height = 26
     Top = 160
     Width = 320
     EchoMode = emPassword
@@ -74,8 +75,8 @@ object Form6: TForm6
     Top = 232
     Width = 75
     Caption = 'OK'
-    OnClick = Button2Click
     TabOrder = 4
+    OnClick = Button2Click
   end
   object RadioButton1: TRadioButton
     Left = 24

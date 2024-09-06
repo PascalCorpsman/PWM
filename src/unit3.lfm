@@ -6,9 +6,10 @@ object Form3: TForm3
   Caption = 'Form3'
   ClientHeight = 593
   ClientWidth = 896
-  OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
+  OnShow = FormShow
   object StringGrid1: TStringGrid
     Left = 8
     Height = 520
@@ -71,17 +72,17 @@ object Form3: TForm3
   end
   object Label1: TLabel
     Left = 8
-    Height = 15
+    Height = 16
     Top = 8
-    Width = 85
+    Width = 99
     Caption = 'Aktual Database'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 136
-    Height = 15
+    Height = 16
     Top = 8
-    Width = 99
+    Width = 113
     Caption = 'Database to merge'
     ParentColor = False
   end
