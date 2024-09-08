@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.20                                                         *)
+(* Version     : 0.21                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -56,6 +56,8 @@
 (*               0.18 = Add "unhide" Passwort to single user DB prompt        *)
 (*               0.19 = ADD show password length in "ADD" dialog              *)
 (*               0.20 = Show app on screen where the mouse is located         *)
+(*               0.21 = Alphabetical sort in user management menu             *)
+(*                      Show user in user manager list                        *)
 (*                                                                            *)
 (******************************************************************************)
 Unit Unit1;
@@ -69,7 +71,7 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
-  PWM_Version = '0.20';
+  PWM_Version = '0.21';
 
   IndexPassword = 0;
   IndexUrl = 1;

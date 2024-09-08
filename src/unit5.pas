@@ -226,6 +226,34 @@ Begin
 End;
 
 Procedure TForm5.InitData(Const DataBase: TPWM);
+  Procedure Quick(li, re: integer);
+  Var
+    l, r: Integer;
+    p: String;
+    h: TDataSet;
+  Begin
+    If Li < Re Then Begin
+      // Achtung, das Pivotelement darf nur einam vor den While schleifen ausgelesen werden, danach nicht mehr !!
+      p := fDatasets[Trunc((li + re) / 2)].Description;
+      l := Li;
+      r := re;
+      While l < r Do Begin
+        While CompareStr(fDatasets[l].Description, p) < 0 Do
+          inc(l);
+        While CompareStr(fDatasets[r].Description, p) > 0 Do
+          dec(r);
+        If L <= R Then Begin
+          h := fDatasets[l];
+          fDatasets[l] := fDatasets[r];
+          fDatasets[r] := h;
+          inc(l);
+          dec(r);
+        End;
+      End;
+      quick(li, r);
+      quick(l, re);
+    End;
+  End;
 Var
   sl, l: TStringList;
   i: Integer;
@@ -240,9 +268,11 @@ Begin
   label3.Caption := fDataBase.AktualUser;
   CheckListBox1.Clear;
   fDatasets := fDataBase.LocateDataSets('');
+  // Sort Datasets by Description
+  quick(0, high(fDatasets));
   For i := 0 To high(fDatasets) Do Begin
     l := fDataBase.getUsersFor(fDatasets[i]);
-    CheckListBox1.Items.Add(fDatasets[i].Description + ' [' + l.CommaText + ']');
+    CheckListBox1.Items.Add(fDatasets[i].Description + '(' + fDatasets[i].UserName + ') [' + l.CommaText + ']');
     l.free;
     CheckListBox1.Checked[CheckListBox1.Count - 1] := false;
   End;
