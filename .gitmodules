@@ -1,0 +1,6 @@
+[submodule "use/luipack"]
+	path = use/luipack
+	url = https://github.com/blikblum/luipack.git
+[submodule "use/lazarus-ccr-dcpcrypt"]
+	path = use/lazarus-ccr-dcpcrypt
+	url = https://git.code.sf.net/p/lazarus-ccr/dcpcrypt
