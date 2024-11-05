@@ -38,7 +38,7 @@ Function PrivMsiexec {
             }
         }
         Start-Process -PassThru -Wait @params
-        Remove-Item $params.OutFile
+        Remove-Item $Input.Current
     }
 }
 
