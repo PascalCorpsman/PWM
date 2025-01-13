@@ -34,4 +34,5 @@ jobs:
       shell: bash
       run: |
         sudo bash -c 'apt-get update; apt-get install -y lazarus' >/dev/null
-        instantfpc "-Fu/usr/lib/lazarus/3.0/components/lazutils" .github/workflows/make.pas
+        read -r < <(sudo find /usr/lib/lazarus -name lazutils | sort)
+        instantfpc "-Fu${REPLY}" .github/workflows/make.pas
