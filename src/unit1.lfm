@@ -8,7 +8,7 @@ object Form1: TForm1
   ClientWidth = 621
   Menu = MainMenu1
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -143,6 +143,13 @@ object Form1: TForm1
       object MenuItem11: TMenuItem
         Caption = 'Merge other database'
         OnClick = MenuItem11Click
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem17: TMenuItem
+        Caption = 'Preferences'
+        OnClick = MenuItem17Click
       end
     end
     object MenuItem9: TMenuItem

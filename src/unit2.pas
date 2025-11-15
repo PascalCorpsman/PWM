@@ -30,6 +30,7 @@ Type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    CheckBox1: TCheckBox;
     CheckGroup1: TCheckGroup;
     Edit1: TEdit;
     Edit10: TEdit;
@@ -112,6 +113,12 @@ Const
   Letters: Set Of Char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   Numbers: Set Of Char = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  AmbigiusChars: Set Of Char = [
+  'l', '1', 'I' // Kleines L, Eins, Großes i
+  , 'O', '0', 'o' // Großes o, Null, kleines O
+  , '5', 'S' // Fünf, großes s
+  , '2', 'Z' // Zwei, goßes z
+  ];
 Var
   c: Char;
   chars: Array Of Char;
@@ -137,8 +144,15 @@ Begin
   len := strtointdef(edit5.text, 1);
   charslen := length(chars);
   If length(chars) > 0 Then Begin
-    For i := 0 To len - 1 Do Begin
-      res := res + chars[random(charslen)];
+    // Theoretisch ist es möglich hier eine Endlosschleife zu bauen, wenn man nur Sonderzeichen zuläst und alle Sonderzeichen Ambigius sind,
+    // aber wer das macht, dem geschieht es nicht anders ;)
+    While length(res) < len Do Begin
+      c := chars[random(charslen)];
+      If CheckBox1.Checked And (c In AmbigiusChars) Then Begin
+        c := #0;
+      End;
+      If c <> #0 Then
+        res := res + c;
     End;
   End;
   If CheckGroup1.Checked[3] Then Begin

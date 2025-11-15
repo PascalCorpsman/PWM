@@ -1,0 +1,38 @@
+object Form8: TForm8
+  Left = 339
+  Height = 240
+  Top = 117
+  Width = 320
+  Caption = 'Form8'
+  ClientHeight = 240
+  ClientWidth = 320
+  Position = poScreenCenter
+  LCLVersion = '4.99.0.0'
+  OnCreate = FormCreate
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 200
+    Width = 75
+    Caption = 'Abort'
+    ModalResult = 2
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 232
+    Height = 25
+    Top = 200
+    Width = 75
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object CheckBox1: TCheckBox
+    Left = 16
+    Height = 22
+    Top = 8
+    Width = 202
+    Caption = 'Autoadjust width after search'
+    TabOrder = 2
+  end
+end

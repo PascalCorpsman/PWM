@@ -58,6 +58,9 @@
 (*               0.20 = Show app on screen where the mouse is located         *)
 (*               0.21 = Alphabetical sort in user management menu             *)
 (*                      Show user in user manager list                        *)
+(*               0.22 = Add Preferences                                       *)
+(*                      Add Option ignore irritating symbols                  *)
+(*                      Add Option autosize result window                     *)
 (*                                                                            *)
 (******************************************************************************)
 Unit Unit1;
@@ -71,7 +74,7 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
-  PWM_Version = '0.21';
+  PWM_Version = '0.22';
 
   IndexPassword = 0;
   IndexUrl = 1;
@@ -99,6 +102,7 @@ Type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -110,6 +114,7 @@ Type
     OpenDialog1: TOpenDialog;
     PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
+    Separator1: TMenuItem;
     StatusBar1: TStatusBar;
     StringGrid1: TStringGrid;
     UniqueInstance1: TUniqueInstance;
@@ -124,6 +129,7 @@ Type
     Procedure MenuItem12Click(Sender: TObject);
     Procedure MenuItem14Click(Sender: TObject);
     Procedure MenuItem16Click(Sender: TObject);
+    Procedure MenuItem17Click(Sender: TObject);
     Procedure MenuItem2Click(Sender: TObject);
     Procedure MenuItem3Click(Sender: TObject);
     Procedure MenuItem5Click(Sender: TObject);
@@ -176,6 +182,7 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
   , unit5 // User Management
   // , unit6 Add User Dialog
   // , unit7 Password change dialog
+  , unit8 // Options Dialog
   ;
 
 { TForm1 }
@@ -293,6 +300,15 @@ Begin
   End
   Else Begin
     showmessage('Error, nothing selected.');
+  End;
+End;
+
+Procedure TForm1.MenuItem17Click(Sender: TObject);
+Begin
+  // Options
+  form8.CheckBox1.Checked := IniPropStorage1.ReadBoolean('AdjustWidthAfterSearch', true);
+  If form8.ShowModal = mrOK Then Begin
+    IniPropStorage1.WriteBoolean('AdjustWidthAfterSearch', form8.CheckBox1.Checked);
   End;
 End;
 
@@ -614,7 +630,7 @@ End;
 
 Procedure TForm1.LoadDataSets();
 Var
-  i: Integer;
+  w, i, OSOffset: Integer;
 Begin
   SelectedRow := -1;
   StringGrid1.RowCount := length(fLoadedDataSets) + 1;
@@ -625,6 +641,18 @@ Begin
     StringGrid1.Cells[IndexUrl, i + 1] := 'Open';
   End;
   StringGrid1.AutoSizeColumns;
+  If IniPropStorage1.ReadBoolean('AdjustWidthAfterSearch', true) Then Begin
+    w := 0;
+    For i := 0 To StringGrid1.ColCount - 1 Do Begin
+      w := w + StringGrid1.ColWidths[i];
+    End;
+{$IFDEF Windows}
+    OSOffset := Scale96ToForm(5); // TODO: rauskriegen
+{$ELSE}
+    OSOffset := Scale96ToForm(5);
+{$ENDIF}
+    form1.Width := max(form1.Width, w + OSOffset);
+  End;
   RefreshStatusBar();
 End;
 
