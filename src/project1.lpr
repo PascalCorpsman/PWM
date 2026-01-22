@@ -21,7 +21,8 @@ Uses
   cthreads,
 {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, Unit1, upwm, Unit2, Unit3, unit4, unit5, unit6, unit7, Unit8;
+  Forms, Unit1, Unit2, Unit3, unit4, unit5, unit6, unit7, Unit8,
+  unit9;
 
 {$R *.res}
 
@@ -37,6 +38,7 @@ Begin
   Application.CreateForm(TForm6, Form6);
   Application.CreateForm(TForm7, Form7);
   Application.CreateForm(TForm8, Form8);
+  Application.CreateForm(TForm9, Form9);
   Application.Run;
 End.
 

@@ -1,0 +1,49 @@
+object Form9: TForm9
+  Left = 340
+  Height = 162
+  Top = 118
+  Width = 324
+  Caption = 'Form9'
+  ClientHeight = 162
+  ClientWidth = 324
+  Position = poScreenCenter
+  LCLVersion = '4.99.0.0'
+  OnCreate = FormCreate
+  object RadioGroup1: TRadioGroup
+    Left = 8
+    Height = 105
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoFill = True
+    Caption = 'RadioGroup1'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 8
+    Height = 25
+    Top = 128
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 237
+    Height = 25
+    Top = 128
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 2
+  end
+end

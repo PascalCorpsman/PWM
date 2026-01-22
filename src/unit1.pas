@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.21                                                         *)
+(* Version     : 0.23                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -61,7 +61,18 @@
 (*               0.22 = Add Preferences                                       *)
 (*                      Add Option ignore irritating symbols                  *)
 (*                      Add Option autosize result window                     *)
+(*               0.23 = Add Icons to Menu                                     *)
+(*                      Add support for fileserver                            *)
 (*                                                                            *)
+(******************************************************************************)
+(*  Silk icon set 1.3 used                                                    *)
+(*  ----------------------                                                    *)
+(*  Mark James                                                                *)
+(*   https://peacocksoftware.com/silk                                         *)
+(******************************************************************************)
+(*  This work is licensed under a                                             *)
+(*  Creative Commons Attribution 2.5 License.                                 *)
+(*  [ http://creativecommons.org/licenses/by/2.5/ ]                           *)
 (******************************************************************************)
 Unit Unit1;
 
@@ -74,7 +85,7 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
-  PWM_Version = '0.22';
+  PWM_Version = '0.23';
 
   IndexPassword = 0;
   IndexUrl = 1;
@@ -91,6 +102,7 @@ Type
     Button1: TButton;
     Edit1: TEdit;
     GroupBox1: TGroupBox;
+    ImageList1: TImageList;
     IniPropStorage1: TIniPropStorage;
     Label1: TLabel;
     MainMenu1: TMainMenu;
@@ -103,6 +115,8 @@ Type
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -130,6 +144,8 @@ Type
     Procedure MenuItem14Click(Sender: TObject);
     Procedure MenuItem16Click(Sender: TObject);
     Procedure MenuItem17Click(Sender: TObject);
+    Procedure MenuItem18Click(Sender: TObject);
+    Procedure MenuItem19Click(Sender: TObject);
     Procedure MenuItem2Click(Sender: TObject);
     Procedure MenuItem3Click(Sender: TObject);
     Procedure MenuItem5Click(Sender: TObject);
@@ -161,6 +177,7 @@ Type
     Procedure ClearLCL();
     Procedure LoadDataSets();
     Procedure RefreshStatusBar();
+    Procedure MergeDataBase(Const DatabaseFilename: String);
   public
     Function PromptPassword(Const Database: String; UserToPreselect: String; EnableUserSelection: Boolean = True): TUser;
     Procedure OpenDatabase(Filename: String);
@@ -183,6 +200,8 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
   // , unit6 Add User Dialog
   // , unit7 Password change dialog
   , unit8 // Options Dialog
+  , unit9 // Select Database Dialog
+  , usslconnector
   ;
 
 { TForm1 }
@@ -215,9 +234,6 @@ Begin
 End;
 
 Procedure TForm1.MenuItem11Click(Sender: TObject);
-Var
-  i, c: Integer;
-  msg: String;
 Begin
   // Merge Other Database into actual
   If Not fDataBase.Connected Then Begin
@@ -225,42 +241,7 @@ Begin
     exit;
   End;
   If OpenDialog1.Execute Then Begin
-    If form3.Merge(OpenDialog1.FileName, fDataBase.LocateDataSets('')) = mrOK Then Begin
-      msg := '';
-      setlength(fLoadedDataSets, length(Form3.DataSetsToAdd) + length(form3.DataSetsToOverwrite));
-      c := 0;
-      For i := 0 To high(Form3.DataSetsToAdd) Do Begin
-        If fDataBase.AddDataSet(Form3.DataSetsToAdd[i], fDataBase.AktualUserRights = urAdminRights) Then Begin
-          fLoadedDataSets[c] := Form3.DataSetsToAdd[i];
-          c := c + 1;
-        End
-        Else Begin
-          msg := msg + LineEnding + Form3.DataSetsToAdd[i].Description;
-        End;
-      End;
-      // TODO: Das gibt so noch eine komische Fehlermeldung, wenn der User kein Admin ist, evtl umstellen.
-      If msg <> '' Then Begin
-        msg := 'The Following datasets are alredy existed, but the user didn''t have access rights to it. The rights are now extended, but the content was not changed. Please repeat merge process.' + LineEnding + msg;
-      End;
-      setlength(Form3.DataSetsToAdd, 0);
-      For i := 0 To high(form3.DataSetsToOverwrite) Do Begin
-        If fDataBase.OverwriteDataSet(form3.DataSetsToOverwrite[i]) Then Begin
-          fLoadedDataSets[c] := Form3.DataSetsToOverwrite[i];
-          c := c + 1;
-        End
-        Else Begin
-          msg := msg + LineEnding + fDataBase.LastError;
-        End;
-      End;
-      setlength(Form3.DataSetsToOverwrite, 0);
-      If msg <> '' Then Begin
-        ShowMessage(msg);
-      End;
-      If c <> length(fLoadedDataSets) Then Begin
-        setlength(fLoadedDataSets, c);
-      End;
-      LoadDataSets();
-    End;
+    MergeDataBase(OpenDialog1.FileName);
   End;
 End;
 
@@ -307,9 +288,103 @@ Procedure TForm1.MenuItem17Click(Sender: TObject);
 Begin
   // Options
   form8.CheckBox1.Checked := IniPropStorage1.ReadBoolean('AdjustWidthAfterSearch', true);
+  form8.Edit6.text := IniPropStorage1.ReadString('URL', 'https://127.0.0.1');
+  form8.Edit7.text := IniPropStorage1.ReadString('PORT', '8444');
+  form8.Init(fUser);
   If form8.ShowModal = mrOK Then Begin
     IniPropStorage1.WriteBoolean('AdjustWidthAfterSearch', form8.CheckBox1.Checked);
+    IniPropStorage1.WriteString('URL', form8.Edit6.text);
+    IniPropStorage1.WriteString('PORT', form8.Edit7.text);
   End;
+End;
+
+Procedure TForm1.MenuItem18Click(Sender: TObject);
+Var
+  pw, url, Port: String;
+  m: TMemoryStream;
+Begin
+  // Merge Other Database into actual
+  If Not fDataBase.Connected Then Begin
+    showmessage('Error, no valid database loaded.');
+    exit;
+  End;
+  pw := PasswordBox('', 'Please enter password for server:');
+  If trim(pw) = '' Then Begin
+    showmessage('Error, invalid password.');
+  End;
+  url := IniPropStorage1.ReadString('URL', 'https://127.0.0.1');
+  Port := IniPropStorage1.ReadString('PORT', '8444');
+  If Not Login(url, Port, fUser, pw) Then Begin
+    showmessage('Failed to login as : ' + fUser);
+  End;
+  m := TMemoryStream.Create;
+  m.LoadFromFile(IniPropStorage1.ReadString('LastDatabase', ''));
+  If SendDB(m) Then Begin
+    showmessage('Done.');
+  End
+  Else Begin
+    showmessage('Failed to upload database.');
+  End;
+  m.free;
+  logout;
+End;
+
+Procedure TForm1.MenuItem19Click(Sender: TObject);
+Var
+  pw, url, Port: String;
+  m: TMemoryStream;
+  sl: TStringList;
+  tmpdbname: String;
+Begin
+  // Merge Other Database into actual
+  If Not fDataBase.Connected Then Begin
+    showmessage('Error, no valid database loaded.');
+    exit;
+  End;
+  If (SecureDBIsSaved('Merge, without save can result in loosing changes. Do you really want to merge now ?') = rCancel) Then Begin
+    // rOK und rIgnore führen dazu dass es weiter geht ..
+    exit;
+  End;
+  // Download DB From Server
+  pw := PasswordBox('', 'Please enter password for server:');
+  If trim(pw) = '' Then Begin
+    showmessage('Error, invalid password.');
+    exit;
+  End;
+  url := IniPropStorage1.ReadString('URL', 'https://127.0.0.1');
+  Port := IniPropStorage1.ReadString('PORT', '8444');
+  If Not Login(url, Port, fUser, pw) Then Begin
+    showmessage('Failed to login as : ' + fUser);
+    exit;
+  End;
+  sl := GetDBList();
+  If Not assigned(sl) Then Begin
+    showmessage('Error, unable to load database list.');
+    Logout;
+    sl.free;
+    exit;
+  End;
+  If sl.Count = 0 Then Begin
+    showmessage('Error, no databases on the server available.');
+    Logout;
+    sl.free;
+    exit;
+  End;
+  form9.InitWith(sl);
+  sl.free;
+  If form9.showmodal <> mrOK Then exit;
+  m := DownloadDB(form9.RadioGroup1.Items[form9.RadioGroup1.ItemIndex]);
+  Logout;
+  If Not assigned(m) Then Begin
+    showmessage('Error, unable to download database.');
+    m.free;
+    exit;
+  End;
+  tmpdbname := GetTempFileName();
+  m.SaveToFile(tmpdbname);
+  m.free;
+  MergeDataBase(tmpdbname);
+  DeleteFile(tmpdbname);
 End;
 
 Procedure TForm1.Edit1KeyPress(Sender: TObject; Var Key: char);
@@ -622,13 +697,13 @@ Begin
   users.free;
 End;
 
-Procedure TForm1.ClearLCL();
+Procedure TForm1.ClearLCL;
 Begin
   StringGrid1.RowCount := 1;
   SelectedRow := -1;
 End;
 
-Procedure TForm1.LoadDataSets();
+Procedure TForm1.LoadDataSets;
 Var
   w, i, OSOffset: Integer;
 Begin
@@ -656,9 +731,52 @@ Begin
   RefreshStatusBar();
 End;
 
-Procedure TForm1.RefreshStatusBar();
+Procedure TForm1.RefreshStatusBar;
 Begin
   StatusBar1.Panels[0].Text := inttostr(StringGrid1.RowCount - 1) + ' entries';
+End;
+
+Procedure TForm1.MergeDataBase(Const DatabaseFilename: String);
+Var
+  i, c: Integer;
+  msg: String;
+Begin
+  If form3.Merge(DatabaseFilename, fDataBase.LocateDataSets('')) = mrOK Then Begin
+    msg := '';
+    setlength(fLoadedDataSets, length(Form3.DataSetsToAdd) + length(form3.DataSetsToOverwrite));
+    c := 0;
+    For i := 0 To high(Form3.DataSetsToAdd) Do Begin
+      If fDataBase.AddDataSet(Form3.DataSetsToAdd[i], fDataBase.AktualUserRights = urAdminRights) Then Begin
+        fLoadedDataSets[c] := Form3.DataSetsToAdd[i];
+        c := c + 1;
+      End
+      Else Begin
+        msg := msg + LineEnding + Form3.DataSetsToAdd[i].Description;
+      End;
+    End;
+    // TODO: Das gibt so noch eine komische Fehlermeldung, wenn der User kein Admin ist, evtl umstellen.
+    If msg <> '' Then Begin
+      msg := 'The Following datasets are alredy existed, but the user didn''t have access rights to it. The rights are now extended, but the content was not changed. Please repeat merge process.' + LineEnding + msg;
+    End;
+    setlength(Form3.DataSetsToAdd, 0);
+    For i := 0 To high(form3.DataSetsToOverwrite) Do Begin
+      If fDataBase.OverwriteDataSet(form3.DataSetsToOverwrite[i]) Then Begin
+        fLoadedDataSets[c] := Form3.DataSetsToOverwrite[i];
+        c := c + 1;
+      End
+      Else Begin
+        msg := msg + LineEnding + fDataBase.LastError;
+      End;
+    End;
+    setlength(Form3.DataSetsToOverwrite, 0);
+    If msg <> '' Then Begin
+      ShowMessage(msg);
+    End;
+    If c <> length(fLoadedDataSets) Then Begin
+      setlength(fLoadedDataSets, c);
+    End;
+    LoadDataSets();
+  End;
 End;
 
 Procedure TForm1.OpenDatabase(Filename: String);
