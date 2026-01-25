@@ -314,7 +314,7 @@ Begin
   End;
   url := IniPropStorage1.ReadString('URL', 'https://127.0.0.1');
   Port := IniPropStorage1.ReadString('PORT', '8444');
-  If Not Login(url, Port, fUser, pw) Then Begin
+  If Not Login(url, Port, ClientID, fUser, pw) Then Begin
     showmessage('Failed to login as : ' + fUser);
   End;
   m := TMemoryStream.Create;
@@ -353,7 +353,7 @@ Begin
   End;
   url := IniPropStorage1.ReadString('URL', 'https://127.0.0.1');
   Port := IniPropStorage1.ReadString('PORT', '8444');
-  If Not Login(url, Port, fUser, pw) Then Begin
+  If Not Login(url, Port, ClientID, fUser, pw) Then Begin
     showmessage('Failed to login as : ' + fUser);
     exit;
   End;

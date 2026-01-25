@@ -56,7 +56,7 @@ Implementation
 
 { TForm8 }
 
-Uses usslconnector;
+Uses usslconnector, upwm;
 
 Procedure TForm8.FormCreate(Sender: TObject);
 Begin
@@ -76,7 +76,7 @@ Begin
   If trim(pw) = '' Then Begin
     showmessage('Error, invalid password.');
   End;
-  If Login(edit6.text, edit7.text, fuser, pw) Then Begin
+  If Login(edit6.text, edit7.text, ClientID, fuser, pw) Then Begin
     showmessage('Successfully logged in as: ' + fuser);
   End;
   logout;
@@ -98,7 +98,7 @@ Begin
     showmessage('Error, new password is only space empty.');
     exit;
   End;
-  If Login(Edit6.text, edit7.text, fuser, OldPW) Then Begin
+  If Login(Edit6.text, edit7.text, ClientID, fuser, OldPW) Then Begin
     If SetPassword(NewPW) Then Begin
       showmessage('Password change succeed.');
     End

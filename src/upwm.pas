@@ -22,6 +22,12 @@ Uses
   Forms, Classes, SysUtils, udatabase, DCPblowfish, DCPrijndael, DCPsha256, DCPcrypt2;
 
 Const
+
+  (*
+   * Client ID für Filechecker ssl Interface
+   *)
+  ClientID = 'PWM';
+
   (*
    * Every Database has this text stored, it is used to validate the decryption process
    * So its content don't care but need to be fix.

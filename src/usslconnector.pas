@@ -23,7 +23,7 @@ Interface
 Uses
   Classes, SysUtils;
 
-Function Login(URL, Port, UserName, Password: String): Boolean;
+Function Login(URL, Port, aClientID, UserName, Password: String): Boolean;
 
 Procedure Logout;
 
@@ -58,7 +58,7 @@ Begin
 
 End;
 
-Function Login(URL, Port, UserName, Password: String): Boolean;
+Function Login(URL, Port, aClientID, UserName, Password: String): Boolean;
 Var
 {$IFDEF Debug}
   i: integer;
@@ -76,7 +76,7 @@ Begin
   End;
   client := TFPHttpClient.Create(Nil);
   // 1. Anfrage der Challenge
-  AuthHeader := 'Username ' + EncodeStringBase64(Username);
+  AuthHeader := 'Username ' + EncodeStringBase64(Username) + ' Client ' + EncodeStringBase64(aClientID);
   client.AddHeader('Authorization', AuthHeader);
   Try
     rndString := client.Get(URL + '/getchallenge');
@@ -152,7 +152,7 @@ Begin
   // TODO: Eigentlich müsste das free und create nicht sein, aber ohne kann man Header nicht neu setzen :/
   client.free;
   client := TFPHttpClient.Create(Nil);
-  AuthHeader := 'Bearer ' + EncodeStringBase64(Challengeres) + ' Username ' + EncodeStringBase64(Username);
+  AuthHeader := 'Bearer ' + EncodeStringBase64(Challengeres) + ' Username ' + EncodeStringBase64(Username) + ' Client ' + EncodeStringBase64(aClientID);
   client.AddHeader('Authorization', AuthHeader);
   BaseURL := url;
   LoggedIn := true;
@@ -262,7 +262,7 @@ Begin
   result := true;
 End;
 
-Function GetDBList(): TStringList;
+Function GetDBList: TStringList;
 Var
   dbList: String;
 Begin
@@ -279,7 +279,7 @@ Begin
   result.Text := dbList;
 End;
 
-Function GetUserList(): TStringList;
+Function GetUserList: TStringList;
 Var
   dbList: String;
 Begin
