@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.23                                                         *)
+(* Version     : 0.24                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -63,6 +63,7 @@
 (*                      Add Option autosize result window                     *)
 (*               0.23 = Add Icons to Menu                                     *)
 (*                      Add support for fileserver                            *)
+(*               0.24 =                                                       *)
 (*                                                                            *)
 (******************************************************************************)
 (*  Silk icon set 1.3 used                                                    *)
@@ -85,7 +86,7 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
-  PWM_Version = '0.23';
+  PWM_Version = '0.24';
 
   IndexPassword = 0;
   IndexUrl = 1;
