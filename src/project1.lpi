@@ -37,7 +37,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="14">
+    <Units Count="13">
       <Unit0>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -122,13 +122,6 @@
         <Filename Value="..\Sample\DatenSteuerung\FileChecker2\usslconnector.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit12>
-      <Unit13>
-        <Filename Value="unit9.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form9"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit13>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

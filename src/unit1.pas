@@ -200,7 +200,6 @@ Uses LazFileUtils, LCLType, Clipbrd, lclintf, math
   // , unit6 Add User Dialog
   // , unit7 Password change dialog
   , unit8 // Options Dialog
-  , unit9 // Select Database Dialog
   , usslconnector
   ;
 
@@ -333,8 +332,7 @@ Procedure TForm1.MenuItem19Click(Sender: TObject);
 Var
   pw, url, Port: String;
   m: TMemoryStream;
-  sl: TStringList;
-  tmpdbname: String;
+  tmpdbname, dummy: String;
 Begin
   // Merge Other Database into actual
   If Not fDataBase.Connected Then Begin
@@ -357,27 +355,10 @@ Begin
     showmessage('Failed to login as : ' + fUser);
     exit;
   End;
-  sl := GetDBList();
-  If Not assigned(sl) Then Begin
-    showmessage('Error, unable to load database list.');
-    Logout;
-    sl.free;
-    exit;
-  End;
-  If sl.Count = 0 Then Begin
-    showmessage('Error, no databases on the server available.');
-    Logout;
-    sl.free;
-    exit;
-  End;
-  form9.InitWith(sl);
-  sl.free;
-  If form9.showmodal <> mrOK Then exit;
-  m := DownloadDB(form9.RadioGroup1.Items[form9.RadioGroup1.ItemIndex]);
+  m := RequestaDBAndDownloadIt(dummy);
   Logout;
   If Not assigned(m) Then Begin
     showmessage('Error, unable to download database.');
-    m.free;
     exit;
   End;
   tmpdbname := GetTempFileName();

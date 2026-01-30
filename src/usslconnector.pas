@@ -23,6 +23,15 @@ Interface
 Uses
   Classes, SysUtils;
 
+(*
+ * Functions to "talk" to server on lowest level
+ *
+ * Usage:
+ *    1. Login
+ *    2. Call whatever functions you want
+ *    3. Logout
+ *)
+
 Function Login(URL, Port, aClientID, UserName, Password: String): Boolean;
 
 Procedure Logout;
@@ -39,13 +48,23 @@ Function SetUserRights(UserName: String; Rights: Integer): Boolean;
 Function delUser(Username: String): Boolean;
 Function addUser(Username, Password: String; Rights: integer): Boolean;
 
+(*
+ * Helper Routines, that are often needed, when writing a client, more higher level
+ *)
+
+// After Successfully logged in, this routine calls
+// - GetDBList
+// - Popups a dialog which DB to download
+// - Downloads the selected DB and returns it as stream
+// Nil -> Abort or error
+Function RequestaDBAndDownloadIt(Out SelectedDataBase: String): TMemoryStream;
+
 Implementation
 
 Uses
-  base64
+  base64, Dialogs, Forms, StdCtrls, ExtCtrls, Controls
   , DCPrijndael, DCPsha256, DCPcrypt2
   , fphttpclient, opensslsockets
-  , Dialogs // Debugging
   ;
 
 Var
@@ -57,6 +76,23 @@ Procedure nop();
 Begin
 
 End;
+
+Type
+
+  { TDBListQuestionForm }
+
+  TDBListQuestionForm = Class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    RadioGroup1: TRadioGroup;
+    //    Procedure FormCreate(Sender: TObject);
+  private
+
+  public
+    // Weil die Form keine Ressource hat, muss sie mittels CreateNew erzeugt werden, was auch immer das für einen unterschied macht ...
+    Constructor CreateNew(AOwner: TComponent; Num: Integer = 0); override;
+    Procedure InitWith(Const list: TStringList);
+  End;
 
 Function Login(URL, Port, aClientID, UserName, Password: String): Boolean;
 Var
@@ -369,6 +405,91 @@ Begin
   Client.RequestBody := Nil;
   If client.ResponseStatusCode <> 200 Then exit;
   result := true;
+End;
+
+Function RequestaDBAndDownloadIt(Out SelectedDataBase: String): TMemoryStream;
+Var
+  sl: TStringList;
+  f: TDBListQuestionForm;
+Begin
+  result := Nil;
+  SelectedDataBase := '';
+  If Not LoggedIn Then Begin
+    showmessage('Error, not logged in.');
+    exit;
+  End;
+  sl := GetDBList();
+  If Not assigned(sl) Then Begin
+    showmessage('Error, unable to load database list.');
+    Logout;
+    sl.free;
+    exit;
+  End;
+  If sl.Count = 0 Then Begin
+    showmessage('Error, no databases on the server available.');
+    Logout;
+    sl.free;
+    exit;
+  End;
+  f := TDBListQuestionForm.CreateNew(Nil);
+  f.InitWith(sl);
+  sl.free;
+  If f.ShowModal <> mrOK Then Begin
+    f.free;
+    exit;
+  End;
+  result := DownloadDB(f.RadioGroup1.Items[f.RadioGroup1.ItemIndex]);
+  If assigned(result) Then
+    SelectedDataBase := f.RadioGroup1.Items[f.RadioGroup1.ItemIndex];
+  f.free;
+End;
+
+{ TDBListQuestionForm }
+
+Constructor TDBListQuestionForm.CreateNew(AOwner: TComponent; Num: Integer);
+Begin
+  Inherited CreateNew(AOwner, Num);
+  position := poScreenCenter;
+  width := 324;
+  height := 162;
+  caption := 'Select database';
+  button1 := TButton.Create(self);
+  button1.name := 'Button1';
+  button1.Parent := self;
+  button1.Top := 128;
+  button1.Left := 237;
+  button1.ModalResult := mrOK;
+  button1.Anchors := [akRight, akBottom];
+  button1.Caption := 'OK';
+
+  button2 := TButton.Create(self);
+  button2.name := 'Button2';
+  button2.Parent := self;
+  button2.Top := 128;
+  button2.Left := 8;
+  button2.ModalResult := mrCancel;
+  button2.Anchors := [akLeft, akBottom];
+  button2.Caption := 'Cancel';
+
+  RadioGroup1 := TRadioGroup.Create(self);
+  RadioGroup1.name := 'RadioGroup1';
+  RadioGroup1.Parent := self;
+  RadioGroup1.Top := 8;
+  RadioGroup1.Left := 8;
+  RadioGroup1.Width := 304;
+  RadioGroup1.Height := 105;
+  RadioGroup1.Caption := '';
+End;
+
+Procedure TDBListQuestionForm.InitWith(Const list: TStringList);
+Var
+  i: Integer;
+Begin
+  RadioGroup1.Items.Clear;
+  For i := 0 To list.Count - 1 Do Begin
+    RadioGroup1.Items.Add(list[i]);
+  End;
+  If RadioGroup1.Items.Count <> 0 Then RadioGroup1.ItemIndex := 0;
 End;
 
 End.
