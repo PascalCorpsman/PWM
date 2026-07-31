@@ -63,7 +63,7 @@
 (*                      Add Option autosize result window                     *)
 (*               0.23 = Add Icons to Menu                                     *)
 (*                      Add support for fileserver                            *)
-(*               0.24 =                                                       *)
+(*               0.24 = Add, close on ESC                                     *)
 (*                                                                            *)
 (******************************************************************************)
 (*  Silk icon set 1.3 used                                                    *)
@@ -138,6 +138,7 @@ Type
     Procedure FormClose(Sender: TObject; Var CloseAction: TCloseAction);
     Procedure FormCloseQuery(Sender: TObject; Var CanClose: boolean);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
     Procedure FormShow(Sender: TObject);
     Procedure MenuItem10Click(Sender: TObject);
     Procedure MenuItem11Click(Sender: TObject);
@@ -231,6 +232,12 @@ Begin
   Edit1.Text := '';
   fDataBase := TPWM.Create();
   StringGrid1.RowCount := 1;
+End;
+
+Procedure TForm1.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then close;
 End;
 
 Procedure TForm1.MenuItem11Click(Sender: TObject);
