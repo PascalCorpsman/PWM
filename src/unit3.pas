@@ -37,6 +37,7 @@ Type
     PopupMenu1: TPopupMenu;
     StringGrid1: TStringGrid;
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
     Procedure FormShow(Sender: TObject);
     Procedure MenuItem1Click(Sender: TObject);
     Procedure MenuItem2Click(Sender: TObject);
@@ -62,7 +63,7 @@ Var
 
 Implementation
 
-Uses unit1, unit2, LazFileUtils;
+Uses unit1, unit2, LazFileUtils, LCLType;
 
 {$R *.lfm}
 
@@ -98,6 +99,12 @@ End;
 Procedure TForm3.FormCreate(Sender: TObject);
 Begin
   caption := 'Merge overview';
+End;
+
+Procedure TForm3.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then Button1.Click;
 End;
 
 Procedure TForm3.FormShow(Sender: TObject);

@@ -51,6 +51,7 @@ Type
     Procedure Button7Click(Sender: TObject);
     Procedure Button8Click(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
   private
     fDatabase: TPWM;
     fDatasets: TDataSetArray;
@@ -75,6 +76,12 @@ Begin
   caption := 'Usermanagement';
   Constraints.MinWidth := Width;
   Constraints.MinHeight := Height;
+End;
+
+Procedure TForm5.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then close;
 End;
 
 Procedure TForm5.Button1Click(Sender: TObject);

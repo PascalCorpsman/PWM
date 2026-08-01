@@ -6,20 +6,22 @@ object Form6: TForm6
   Caption = 'Form6'
   ClientHeight = 269
   ClientWidth = 354
+  KeyPreview = True
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Label1: TLabel
     Left = 8
     Height = 16
     Top = 8
-    Width = 41
+    Width = 39
     Caption = 'Label1'
   end
   object Edit1: TEdit
     Left = 24
-    Height = 26
+    Height = 30
     Top = 32
     Width = 320
     EchoMode = emPassword
@@ -31,12 +33,12 @@ object Form6: TForm6
     Left = 8
     Height = 16
     Top = 72
-    Width = 126
+    Width = 121
     Caption = 'Enter new username:'
   end
   object Edit2: TEdit
     Left = 24
-    Height = 26
+    Height = 30
     Top = 96
     Width = 320
     TabOrder = 1
@@ -47,12 +49,12 @@ object Form6: TForm6
     Left = 8
     Height = 16
     Top = 136
-    Width = 41
+    Width = 39
     Caption = 'Label3'
   end
   object Edit3: TEdit
     Left = 24
-    Height = 26
+    Height = 30
     Top = 160
     Width = 320
     EchoMode = emPassword
@@ -80,9 +82,9 @@ object Form6: TForm6
   end
   object RadioButton1: TRadioButton
     Left = 24
-    Height = 22
+    Height = 21
     Top = 200
-    Width = 98
+    Width = 102
     Caption = 'Normal user'
     Checked = True
     TabOrder = 5
@@ -90,9 +92,9 @@ object Form6: TForm6
   end
   object RadioButton2: TRadioButton
     Left = 235
-    Height = 22
+    Height = 21
     Top = 200
-    Width = 92
+    Width = 97
     Caption = 'Admin user'
     TabOrder = 6
   end

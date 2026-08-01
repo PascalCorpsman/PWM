@@ -1,19 +1,21 @@
 object Form2: TForm2
   Left = 371
-  Height = 597
+  Height = 620
   Top = 128
   Width = 847
   Caption = 'Form2'
-  ClientHeight = 597
+  ClientHeight = 620
   ClientWidth = 847
+  KeyPreview = True
   Position = poScreenCenter
   LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   object Label1: TLabel
     Left = 8
     Height = 16
     Top = 13
-    Width = 71
+    Width = 70
     Caption = 'Description:'
     ParentColor = False
   end
@@ -21,7 +23,7 @@ object Form2: TForm2
     Left = 8
     Height = 16
     Top = 48
-    Width = 64
+    Width = 62
     Caption = 'Username:'
     ParentColor = False
   end
@@ -29,30 +31,30 @@ object Form2: TForm2
     Left = 8
     Height = 16
     Top = 80
-    Width = 89
+    Width = 87
     Caption = 'Plattform URL:'
     ParentColor = False
   end
   object GroupBox1: TGroupBox
     Left = 8
-    Height = 152
+    Height = 176
     Top = 176
     Width = 441
     Caption = ' Generate a password '
-    ClientHeight = 135
+    ClientHeight = 158
     ClientWidth = 439
     TabOrder = 5
     object Label5: TLabel
       Left = 8
       Height = 16
       Top = 9
-      Width = 43
+      Width = 40
       Caption = 'Length'
       ParentColor = False
     end
     object Edit5: TEdit
       Left = 168
-      Height = 26
+      Height = 30
       Top = 0
       Width = 80
       TabOrder = 0
@@ -60,7 +62,7 @@ object Form2: TForm2
     end
     object CheckGroup1: TCheckGroup
       Left = 8
-      Height = 64
+      Height = 80
       Top = 32
       Width = 425
       Anchors = [akTop, akLeft, akRight]
@@ -74,7 +76,7 @@ object Form2: TForm2
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 47
+      ClientHeight = 62
       ClientWidth = 423
       Columns = 3
       Items.Strings = (
@@ -89,8 +91,8 @@ object Form2: TForm2
       }
       object Edit7: TEdit
         Left = 151
-        Height = 19
-        Top = 22
+        Height = 29
+        Top = 27
         Width = 155
         TabOrder = 4
         Text = 'Edit7'
@@ -99,7 +101,7 @@ object Form2: TForm2
     object Button1: TButton
       Left = 224
       Height = 25
-      Top = 97
+      Top = 120
       Width = 201
       Anchors = [akTop, akLeft, akRight]
       Caption = 'Generate'
@@ -108,9 +110,9 @@ object Form2: TForm2
     end
     object CheckBox1: TCheckBox
       Left = 8
-      Height = 22
-      Top = 104
-      Width = 207
+      Height = 21
+      Top = 127
+      Width = 211
       Caption = 'Exclude ambiguous characters'
       Checked = True
       State = cbChecked
@@ -119,7 +121,7 @@ object Form2: TForm2
   end
   object Edit1: TEdit
     Left = 176
-    Height = 26
+    Height = 30
     Top = 5
     Width = 273
     TabOrder = 0
@@ -127,7 +129,7 @@ object Form2: TForm2
   end
   object Edit2: TEdit
     Left = 176
-    Height = 26
+    Height = 30
     Top = 40
     Width = 273
     TabOrder = 1
@@ -135,7 +137,7 @@ object Form2: TForm2
   end
   object Edit3: TEdit
     Left = 176
-    Height = 26
+    Height = 30
     Top = 72
     Width = 273
     TabOrder = 2
@@ -143,7 +145,7 @@ object Form2: TForm2
   end
   object Edit4: TEdit
     Left = 176
-    Height = 26
+    Height = 30
     Top = 136
     Width = 240
     TabOrder = 4
@@ -161,7 +163,7 @@ object Form2: TForm2
   object Button2: TButton
     Left = 8
     Height = 25
-    Top = 560
+    Top = 584
     Width = 75
     Caption = 'Cancel'
     ModalResult = 2
@@ -170,7 +172,7 @@ object Form2: TForm2
   object Button3: TButton
     Left = 374
     Height = 25
-    Top = 560
+    Top = 584
     Width = 75
     Caption = 'OK'
     ModalResult = 1
@@ -180,13 +182,13 @@ object Form2: TForm2
     Left = 8
     Height = 16
     Top = 113
-    Width = 153
+    Width = 151
     Caption = 'Registered E-mail address'
     ParentColor = False
   end
   object Edit6: TEdit
     Left = 176
-    Height = 26
+    Height = 30
     Top = 104
     Width = 273
     TabOrder = 3
@@ -195,7 +197,7 @@ object Form2: TForm2
   object Button4: TButton
     Left = 176
     Height = 25
-    Top = 560
+    Top = 584
     Width = 75
     Caption = 'Delete'
     ModalResult = 7
@@ -204,15 +206,15 @@ object Form2: TForm2
   object Label7: TLabel
     Left = 8
     Height = 16
-    Top = 336
-    Width = 60
+    Top = 360
+    Width = 57
     Caption = 'Comment'
     ParentColor = False
   end
   object Memo1: TMemo
     Left = 96
     Height = 216
-    Top = 336
+    Top = 360
     Width = 353
     Lines.Strings = (
       'Memo1'
@@ -245,7 +247,7 @@ object Form2: TForm2
   end
   object Edit8: TEdit
     Left = 480
-    Height = 26
+    Height = 30
     Top = 5
     Width = 273
     TabOrder = 10
@@ -253,7 +255,7 @@ object Form2: TForm2
   end
   object Edit9: TEdit
     Left = 480
-    Height = 26
+    Height = 30
     Top = 40
     Width = 273
     TabOrder = 11
@@ -261,7 +263,7 @@ object Form2: TForm2
   end
   object Edit10: TEdit
     Left = 480
-    Height = 26
+    Height = 30
     Top = 72
     Width = 273
     TabOrder = 12
@@ -269,7 +271,7 @@ object Form2: TForm2
   end
   object Edit11: TEdit
     Left = 480
-    Height = 26
+    Height = 30
     Top = 136
     Width = 273
     TabOrder = 13
@@ -293,7 +295,7 @@ object Form2: TForm2
   end
   object Edit12: TEdit
     Left = 480
-    Height = 26
+    Height = 30
     Top = 104
     Width = 273
     TabOrder = 14
@@ -302,7 +304,7 @@ object Form2: TForm2
   object Label14: TLabel
     Left = 464
     Height = 16
-    Top = 336
+    Top = 360
     Width = 4
     Caption = '-'
     ParentColor = False
@@ -310,7 +312,7 @@ object Form2: TForm2
   object Memo2: TMemo
     Left = 480
     Height = 216
-    Top = 336
+    Top = 360
     Width = 353
     Lines.Strings = (
       'Memo2'

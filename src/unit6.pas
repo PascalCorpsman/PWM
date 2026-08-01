@@ -39,6 +39,7 @@ Type
     Procedure Button2Click(Sender: TObject);
     Procedure Edit2Change(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
     Procedure FormShow(Sender: TObject);
   private
 
@@ -54,6 +55,8 @@ Implementation
 
 {$R *.lfm}
 
+Uses LCLType;
+
 { TForm6 }
 
 Procedure TForm6.FormCreate(Sender: TObject);
@@ -63,6 +66,12 @@ Begin
   Constraints.MaxWidth := Width;
   Constraints.MinHeight := Height;
   Constraints.MaxHeight := Height;
+End;
+
+Procedure TForm6.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then button1.Click;
 End;
 
 Procedure TForm6.FormShow(Sender: TObject);

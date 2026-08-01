@@ -6,14 +6,16 @@ object Form5: TForm5
   Caption = 'Form5'
   ClientHeight = 588
   ClientWidth = 536
+  KeyPreview = True
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   object Label1: TLabel
     Left = 8
     Height = 16
     Top = 40
-    Width = 103
+    Width = 102
     Caption = 'Registered Users:'
     ParentColor = False
   end
@@ -32,7 +34,7 @@ object Form5: TForm5
     Left = 8
     Height = 16
     Top = 8
-    Width = 79
+    Width = 76
     Caption = 'Logged in as:'
     ParentColor = False
   end
@@ -40,7 +42,7 @@ object Form5: TForm5
     Left = 120
     Height = 16
     Top = 8
-    Width = 41
+    Width = 39
     Caption = 'Label3'
     ParentColor = False
   end
@@ -87,7 +89,7 @@ object Form5: TForm5
     Left = 8
     Height = 16
     Top = 208
-    Width = 104
+    Width = 103
     Caption = 'Datasets editable'
     ParentColor = False
   end
@@ -133,10 +135,10 @@ object Form5: TForm5
   end
   object CheckBox1: TCheckBox
     Left = 216
-    Height = 22
+    Height = 21
     Hint = 'Set this if you want to delete a user and this lead to datasets that are not accessable anymore.'
     Top = 192
-    Width = 129
+    Width = 131
     Caption = 'Delete users data'
     ParentShowHint = False
     ShowHint = True

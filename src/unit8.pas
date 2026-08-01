@@ -39,6 +39,7 @@ Type
     Procedure Button10Click(Sender: TObject);
     Procedure Button11Click(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
   private
     fUser: String;
 
@@ -56,11 +57,17 @@ Implementation
 
 { TForm8 }
 
-Uses usslconnector, upwm;
+Uses usslconnector, upwm, LCLType;
 
 Procedure TForm8.FormCreate(Sender: TObject);
 Begin
   caption := 'Options';
+End;
+
+Procedure TForm8.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then button1.Click;
 End;
 
 Procedure TForm8.Init(aUser: String);

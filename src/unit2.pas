@@ -64,6 +64,7 @@ Type
     Procedure Button1Click(Sender: TObject);
     Procedure Edit4Change(Sender: TObject);
     Procedure FormCreate(Sender: TObject);
+    Procedure FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState);
   private
     fStoredData, fStoredData2: TDataSet;
     Procedure InitSpecialCharacters;
@@ -79,6 +80,9 @@ Var
 Implementation
 
 {$R *.lfm}
+
+Uses
+  LCLType;
 
 Const
   SpecialCharacters: Set Of Char = ['(', ')', '[', ']', '!', '.', '?', '@', '#', '^', '&', '+', '-', '*', '%', '/', '\', '_', '=', '>', '<', '~', '$', '|'];
@@ -96,6 +100,12 @@ Begin
   CheckGroup1.Checked[3] := false; // Wir wonnen so unterschiedliche wie möglich haben -> diese Einschränkung wieder weg nehmen.
   Constraints.MaxHeight := Height;
   Constraints.MinHeight := Height;
+End;
+
+Procedure TForm2.FormKeyDown(Sender: TObject; Var Key: Word; Shift: TShiftState
+  );
+Begin
+  If key = VK_ESCAPE Then button2.Click;
 End;
 
 Procedure TForm2.InitSpecialCharacters;

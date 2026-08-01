@@ -7,13 +7,15 @@ object Form4: TForm4
   Caption = 'Form4'
   ClientHeight = 107
   ClientWidth = 473
+  KeyPreview = True
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   object ComboBox1: TComboBox
     Left = 72
-    Height = 30
+    Height = 28
     Top = 8
     Width = 392
     ItemHeight = 0
@@ -38,7 +40,7 @@ object Form4: TForm4
   end
   object Edit1: TEdit
     Left = 72
-    Height = 26
+    Height = 30
     Top = 40
     Width = 352
     EchoMode = emPassword

@@ -6,9 +6,11 @@ object Form8: TForm8
   Caption = 'Form8'
   ClientHeight = 225
   ClientWidth = 260
+  KeyPreview = True
   Position = poScreenCenter
   LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   object Button1: TButton
     Left = 8
     Height = 25
@@ -29,9 +31,9 @@ object Form8: TForm8
   end
   object CheckBox1: TCheckBox
     Left = 16
-    Height = 22
+    Height = 21
     Top = 8
-    Width = 202
+    Width = 206
     Caption = 'Autoadjust width after search'
     TabOrder = 2
   end
@@ -41,7 +43,7 @@ object Form8: TForm8
     Top = 32
     Width = 240
     Caption = ' Database server '
-    ClientHeight = 119
+    ClientHeight = 118
     ClientWidth = 238
     TabOrder = 3
     object Label6: TLabel
@@ -53,7 +55,7 @@ object Form8: TForm8
     end
     object Edit6: TEdit
       Left = 80
-      Height = 26
+      Height = 30
       Top = 6
       Width = 152
       TabOrder = 0
@@ -68,7 +70,7 @@ object Form8: TForm8
     end
     object Edit7: TEdit
       Left = 80
-      Height = 26
+      Height = 30
       Top = 40
       Width = 152
       TabOrder = 1

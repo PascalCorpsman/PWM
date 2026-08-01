@@ -1,20 +1,22 @@
 object Form7: TForm7
   Left = 345
-  Height = 144
+  Height = 149
   Top = 128
   Width = 356
   Caption = 'Form7'
-  ClientHeight = 144
+  ClientHeight = 149
   ClientWidth = 356
+  KeyPreview = True
   Position = poScreenCenter
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Label1: TLabel
     Left = 8
     Height = 16
     Top = 16
-    Width = 83
+    Width = 82
     Caption = 'Old password'
     ParentColor = False
   end
@@ -22,7 +24,7 @@ object Form7: TForm7
     Left = 8
     Height = 16
     Top = 48
-    Width = 86
+    Width = 85
     Caption = 'new password'
     ParentColor = False
   end
@@ -30,13 +32,13 @@ object Form7: TForm7
     Left = 8
     Height = 32
     Top = 72
-    Width = 86
+    Width = 85
     Caption = 'reenter'#13#10'new password'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 96
-    Height = 26
+    Height = 30
     Top = 8
     Width = 210
     EchoMode = emPassword
@@ -47,7 +49,7 @@ object Form7: TForm7
   end
   object Edit2: TEdit
     Left = 96
-    Height = 26
+    Height = 30
     Top = 40
     Width = 210
     EchoMode = emPassword
@@ -58,7 +60,7 @@ object Form7: TForm7
   end
   object Edit3: TEdit
     Left = 96
-    Height = 26
+    Height = 30
     Top = 72
     Width = 210
     EchoMode = emPassword
@@ -70,7 +72,7 @@ object Form7: TForm7
   object Button1: TButton
     Left = 271
     Height = 25
-    Top = 104
+    Top = 112
     Width = 75
     Caption = 'OK'
     TabOrder = 3
@@ -79,7 +81,7 @@ object Form7: TForm7
   object Button2: TButton
     Left = 8
     Height = 25
-    Top = 104
+    Top = 112
     Width = 75
     Caption = 'Cancel'
     ModalResult = 2
