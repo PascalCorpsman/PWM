@@ -116,7 +116,7 @@
         <UnitName Value="Unit8"/>
       </Unit>
       <Unit>
-        <Filename Value="..\Sample\DatenSteuerung\FileChecker2\usslconnector.pas"/>
+        <Filename Value="..\Sample\TCP_IP\SSL_Client_Server\usslconnector.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -129,7 +129,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\..\Projects\Sample\DatenSteuerung\synapse;..\Sample\DatenSteuerung;..\Sample\DatenSteuerung\FileChecker2"/>
+      <OtherUnitFiles Value="..\..\Projects\Sample\DatenSteuerung\synapse;..\Sample\DatenSteuerung;..\Sample\TCP_IP\SSL_Client_Server"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
