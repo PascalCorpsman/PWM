@@ -16,6 +16,7 @@ object Form8: TForm8
     Height = 25
     Top = 184
     Width = 75
+    Anchors = [akLeft, akBottom]
     Caption = 'Abort'
     ModalResult = 2
     TabOrder = 0
@@ -25,6 +26,7 @@ object Form8: TForm8
     Height = 25
     Top = 184
     Width = 75
+    Anchors = [akRight, akBottom]
     Caption = 'OK'
     ModalResult = 1
     TabOrder = 1
@@ -42,6 +44,7 @@ object Form8: TForm8
     Height = 136
     Top = 32
     Width = 240
+    Anchors = [akTop, akLeft, akRight]
     Caption = ' Database server '
     ClientHeight = 118
     ClientWidth = 238
@@ -58,6 +61,7 @@ object Form8: TForm8
       Height = 30
       Top = 6
       Width = 152
+      Anchors = [akTop, akLeft, akRight]
       TabOrder = 0
       Text = 'Edit6'
     end
@@ -73,6 +77,7 @@ object Form8: TForm8
       Height = 30
       Top = 40
       Width = 152
+      Anchors = [akTop, akLeft, akRight]
       TabOrder = 1
       Text = 'Edit7'
     end
@@ -90,6 +95,7 @@ object Form8: TForm8
       Height = 25
       Top = 80
       Width = 105
+      Anchors = [akTop, akRight]
       Caption = 'new Password'
       TabOrder = 3
       OnClick = Button11Click
