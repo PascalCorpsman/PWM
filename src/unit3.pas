@@ -50,7 +50,7 @@ Type
       Var CanSelect: Boolean);
   private
     fNew, fAktual: TDataSetArray;
-    fcol, fRow: integer;
+    fRow: integer;
     Function LoadMergeList(): integer;
     Procedure InitResultDataSets();
   public
@@ -87,7 +87,6 @@ Procedure TForm3.StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
   Var CanSelect: Boolean);
 Begin
   fRow := aRow;
-  fcol := aCol;
 End;
 
 Procedure TForm3.StringGrid1HeaderSized(Sender: TObject; IsColumn: Boolean;
@@ -113,26 +112,32 @@ Begin
 End;
 
 Procedure TForm3.MenuItem1Click(Sender: TObject);
+Var
+  i: Integer;
 Begin
   // Overwrite / Add
-  If (fRow > 0) And (fRow < StringGrid1.RowCount) Then Begin
-    StringGrid1.Cells[Col_Dir, fRow] := '<-'
+  For i := StringGrid1.Selection.Top To StringGrid1.Selection.Bottom Do Begin
+    StringGrid1.Cells[Col_Dir, i] := '<-'
   End;
 End;
 
 Procedure TForm3.MenuItem2Click(Sender: TObject);
+Var
+  i: Integer;
 Begin
   // Add
-  If (fRow > 0) And (fRow < StringGrid1.RowCount) Then Begin
-    StringGrid1.Cells[Col_Dir, fRow] := 'Add'
+  For i := StringGrid1.Selection.Top To StringGrid1.Selection.Bottom Do Begin
+    StringGrid1.Cells[Col_Dir, i] := 'Add'
   End;
 End;
 
 Procedure TForm3.MenuItem3Click(Sender: TObject);
+Var
+  i: Integer;
 Begin
   // Ignore
-  If (fRow > 0) And (fRow < StringGrid1.RowCount) Then Begin
-    StringGrid1.Cells[Col_Dir, fRow] := 'X'
+  For i := StringGrid1.Selection.Top To StringGrid1.Selection.Bottom Do Begin
+    StringGrid1.Cells[Col_Dir, i] := 'X'
   End;
 End;
 

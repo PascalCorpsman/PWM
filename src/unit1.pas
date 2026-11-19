@@ -1,7 +1,7 @@
 (******************************************************************************)
 (* PWM                                                             ??.??.???? *)
 (*                                                                            *)
-(* Version     : 0.24                                                         *)
+(* Version     : 0.25                                                         *)
 (*                                                                            *)
 (* Author      : Uwe Schächterle (Corpsman)                                   *)
 (*                                                                            *)
@@ -64,6 +64,7 @@
 (*               0.23 = Add Icons to Menu                                     *)
 (*                      Add support for fileserver                            *)
 (*               0.24 = Add, close on ESC                                     *)
+(*               0.25 = FIX, gui glitch in merge database dialog              *)
 (*                                                                            *)
 (******************************************************************************)
 (*  Silk icon set 1.3 used                                                    *)
@@ -86,7 +87,7 @@ Uses
   IniPropStorage, Menus, Grids, ComCtrls, upwm, UniqueInstance;
 
 Const
-  PWM_Version = '0.24';
+  PWM_Version = '0.25';
 
   IndexPassword = 0;
   IndexUrl = 1;
@@ -671,7 +672,7 @@ Begin
       form4.Edit1.Text := '';
       form4.ComboBox1.Enabled := EnableUserSelection;
     End;
-    form4.caption := 'Please enter password for:' + ExtractFileNameOnly(Database);
+    form4.caption := 'Please enter password for: ' + ExtractFileNameOnly(Database);
     If Form4.ShowModal = mrOK Then Begin
       If trim(form4.Edit1.Text) <> '' Then retry := false;
       result.UserName := form4.ComboBox1.Text;
